@@ -1,2 +1,10 @@
 Mise en place ce git le 15 mai
 
+mise en place d'un cahier des charges au brouillon
+
+15 mai
+
+*Creation de l'application permettant de demander les entrées a l'utilisateur pour creer le "relevé de compte"
+*Elle s'appelle Depense, elle créé un fichier nommé "transaction.info"
+l'application demande dans l'ordre : date (jj/mm/aaaa), type (parmi CB, Liquide, Chèque), le destinataire (Saisie libre de 20 caracteres), le montant, et enfin la categorie (parmi Immobilier, Alimentaire, Imprévu, Essence, Extra)
+*Une application Clear peut supprimer le fichier "transaction.info" s'il existe reinitialisant les données saisies.
