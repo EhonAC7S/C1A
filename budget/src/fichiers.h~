@@ -1,8 +1,6 @@
 #ifndef FICHIERS
 #define FICHIERS
 
-//faire une enum
-
 struct categorie {
 	char nom[20];
 	int seuil;

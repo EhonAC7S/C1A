@@ -28,7 +28,7 @@ int save(struct categorie cat) {
 		strcat(chaine,cat.endroit[i]);
 		strcat(chaine,",");
 		char str[20];
-		sprintf(str, "%f", cat.montant[i]);
+		sprintf(str, "%.2f", cat.montant[i]);
 		strcat(chaine,str);
 		strcat(chaine,"\n");
 		fputs(chaine,fp);
@@ -66,7 +66,7 @@ struct categorie load(char *fichier) {   //renvoie la structure contenant la cat
 		*ret2 = '\0';
         	strcpy(cat.endroit[i],(char*) ret);
         	ret = ret2+1;
-        	ret2 = memchr(ret, (int) '\n', 20);
+        	ret2 = memchr(ret,(int)'\n', 20);
 		*ret2 = '\0';
         	cat.montant[i] = atof(ret);
         	i++;
