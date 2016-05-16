@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "fichiers.h"
-//#include "structures.c"
 
 /*
 Un fichier par type de dépense ? -> les ranger dans un dossier

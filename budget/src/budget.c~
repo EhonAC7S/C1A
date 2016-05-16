@@ -3,6 +3,7 @@
 #include <string.h>
 #include "menus.h"
 #include "fichiers.h"
+//#include "structures.c"
 
 /*
 Projet de C
