@@ -14,7 +14,7 @@ int main() {
 	char c;
 	fichier = fopen("transaction.info","r");
 	if (fichier==NULL) {
-		printf("Entrez vos transactions avant!");
+		printf("Entrez vos transactions avant !");
 	}
 	else {
 //		while (cont == 'y') {
@@ -28,25 +28,23 @@ int main() {
 		c=fgetc(fichier);
 		do {
 			while (c!=',') {
-				date[i]=c;
-				i++;
+				date[i++]=c;
 				fgetc(fichier);
 			}
 			i=0;
 			while ((c=fgetc(fichier))!=',') {
-				moyen[i] = c;
-				i++;
+				moyen[i++] = c;
 			}
 			i=0;
 			while ((c=fgetc(fichier))!=',') {
-				dest[i] = c;
-				i++;
+				dest[i++] = c;
+				//i++;
 			}
 			fscanf(fichier,"%lf,",&prix);
 			i=0;
 			while ((c=fgetc(fichier))!='\n') {
-				cat[i] = c;
-				i++;
+				cat[i++] = c;
+				//i++;
 			}
 			printf("%s,%s,%s,%.2f,%s \n",date,moyen,dest,prix,cat);
 		} 

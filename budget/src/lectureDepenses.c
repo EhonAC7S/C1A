@@ -14,7 +14,7 @@ int main() {
 	char c;
 	fichier = fopen("transaction.info","r");
 	if (fichier==NULL) {
-		printf("Entrez vos transactions avant!");
+		printf("Entrez vos transactions avant !");
 	}
 	else {
 //		while (cont == 'y') {
@@ -51,6 +51,7 @@ int main() {
 		while ((c=fgetc(fichier))!=EOF);
 	}
 	fclose(fichier);
+	return ;
 }
 
 

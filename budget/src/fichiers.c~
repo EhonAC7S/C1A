@@ -74,5 +74,8 @@ struct categorie load(char *fichier) {   //renvoie la structure contenant la cat
 		fgets(buf,255,fp);
 	}
 	fclose(fp);
+	printf("%s\n",cat.date[0]);
+	printf("%s\n",cat.date[1]);
+	printf("%s\n",cat.date[2]);
 	return cat;
 }
