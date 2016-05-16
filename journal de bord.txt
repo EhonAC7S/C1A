@@ -2,6 +2,11 @@ Mise en place ce git le 15 mai
 
 mise en place d'un cahier des charges au brouillon
 
+12 mai
+
+*Début du projet : création de la structure catégorie et recherches sur la lecture et l'écriture de fichiers
+*Création de la fonction load : ne fonctionne pas, segmentation fault
+
 15 mai
 
 *Creation de l'application permettant de demander les entrées a l'utilisateur pour creer le "relevé de compte"
@@ -17,4 +22,12 @@ l'application demande dans l'ordre : date (jj/mm/aaaa), type (parmi CB, Liquide,
 mais le fichier contient la ligne :
 08/05/2016,Liquide,Julia,50.56,Extra
 Nous cherchons une methode de lecture par caractere plutot que par ligne mais nous avons une erreur de segmentation dans le code actuel.
+
+
+17 mai
+
+*Terminaison de la fonction load : la boucle faisait un tour de trop et lisait une partie de la mémoire qu'elle ne devait pas, d'où l'erreur
+*Amélioration de la structure catégorie : augmentation de la taille des dates de 10 à 11 pour le \0
+*Ecriture de la fonction save
+*Nécessité d'améliorer les fonctions pour le classement des dépenses et revenus
 
