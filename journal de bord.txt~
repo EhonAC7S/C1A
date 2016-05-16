@@ -23,8 +23,8 @@ mais le fichier contient la ligne :
 08/05/2016,Liquide,Julia,50.56,Extra
 Nous cherchons une methode de lecture par caractere plutot que par ligne mais nous avons une erreur de segmentation dans le code actuel.
 
-non on est le 16 encore andouille
-16 //17 mai
+
+17 mai
 
 *Terminaison de la fonction load : la boucle faisait un tour de trop et lisait une partie de la mémoire qu'elle ne devait pas, d'où l'erreur
 *Amélioration de la structure catégorie : augmentation de la taille des dates de 10 à 11 pour le \0
