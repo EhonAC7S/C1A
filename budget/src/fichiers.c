@@ -37,6 +37,7 @@ int save(struct categorie cat) {
 	return 0;
 }
 
+
 struct releve load(char *fichier) {   
 	//Renvoie une structure contenant tous les éléments du relevé
 
@@ -56,7 +57,7 @@ struct releve load(char *fichier) {
 
 	while (!feof(fp)) { //tant qu'on n'est pas à la fin du fichier
 		strncpy(dates,buf,10); //copie les 10 premiers caractères de buf dans cat.dates[i]
-		strcat(dates,"\0");
+		strcat(dates,'\0');
 		strcpy(cat.date[i],dates);
         	ret = strchr(buf,',')+1;
         	ret2 = strchr(ret,',');  //ou : memchr(ret, (int) ',', 20);
@@ -84,8 +85,12 @@ struct releve load(char *fichier) {
 	return cat;
 }
 
-int tri(struct releve rel) {
+
+int tri() {
 	// Range les opérations dans les fichiers correspondant à leur catégorie
+
+	struct releve rel;
+	rel = load("releve");
 
 	struct categorie cat[20];
 	int nbcat = 0; //nb de categories dans cat

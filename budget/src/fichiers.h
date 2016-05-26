@@ -8,7 +8,6 @@ struct categorie {
 	int nbelements;
 	int seuil;
 	char date[255][11];
-	//enum transac type[255]; // Type de transaction (carte, liquide, chèque)
 	char type[255][8];
 	char endroit[255][50];  // Où les transactions ont été faites
 	float montant[255];

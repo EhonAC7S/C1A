@@ -13,11 +13,35 @@ Fonctionnalités du programme :
     - sauvegarder les données dans des fichiers
 */
 
-int main (int argc, char *argv[])  {
-	printf("Début de main\n");
-	struct releve rel;
-	rel = load("test");
-	tri(rel);
-	printf("Fin de main\n");
+void accueil() {
+	int choix,choixCorrect;
+	printf("\n          *** Gestion de budget ***\n\n\n");
+	printf(" Que souhaitez-vous faire ?\n");
+	printf("    1. Trier le relevé de compte\n");
+	printf("    2. Afficher les statistiques\n");
+	printf("    3. Quitter l'application\n");
+	while (choixCorrect == 0) {
+		printf(" Entrez votre choix : ");
+		scanf("%d",&choix);
+		switch (choix) {
+			case 1:
+				tri();
+				printf("Le relevé de compte a bien été trié.\n");
+				choixCorrect = 1;
+				break;
+			case 2:
+				choixCorrect = 1;
+				break;
+			case 3: 
+				choixCorrect = 1;
+				break;
+			default:
+				break;
+		}
+	}
+}
+
+int main (int argc, char *argv[])  { 
+	accueil();
 	return 0;
 }
