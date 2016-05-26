@@ -16,7 +16,9 @@ Fonctionnalités du programme :
 int main (int argc, char *argv[])  {
 	printf("Début de main\n");
 	struct releve rel;
-	rel = load("test");
+	
+	//rel = load("test");
+	
 	tri(rel);
 	printf("Fin de main\n");
 	return 0;

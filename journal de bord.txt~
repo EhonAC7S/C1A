@@ -40,4 +40,4 @@ Ecriture de la fonction de tri du relevé en catégories. Celle-ci ne fonctionne
 *Terminaison de la fonction tri() : le problème venait de la définition de chaines de caractères avec le signe = au lieu de strcpy(). 
 *Erreur de ségmentation corrigée par l'ajout d'un attribut nbelements à la structure relevé (permet d'éviter de devoir parcourir tout le tableau date ce qui faisait lire de la mémoire non autorisée.
 *Problème d'indices de tableau résolu (décallage de 1)
-*Je ne vois plus d'erreur à cette fonction pour le moment : elle range ce que je lui demande de ranger. Je pense faire l'appel à la fonction load() dans la fonction tri() pour éviter de le faire manuellement dans le main().
+*

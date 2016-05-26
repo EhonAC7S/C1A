@@ -3,6 +3,15 @@
 #include <string.h>
 #include "fichiers.h"
 
+/*
+Un fichier par type de dépense ? -> les ranger dans un dossier
+
+Début du fichier : seuil à ne par dépasser (par semaine ou mois) ;
+        -> alerte lorsque l'on s'approche du seuil d'un certain pourcentage
+                    dépense totale actuelle
+
+Un fichier pour les revenus avec en début de fichier la somme présente sur le compte
+*/
 
 int save(struct categorie cat) {
 	//Sauvegarde les données d'une catégorie (notamment utilisé par la fonction tri())
