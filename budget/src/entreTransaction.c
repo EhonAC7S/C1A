@@ -22,12 +22,12 @@ int main() {
 		scanf("%lf",&prix);
 		printf("Entrez la catégorie d'achat parmi Immobilier, Alimentaire, Imprévu, Essence, Extra : ");
 		scanf("%s",cat);
+		printf(fichier,"%s,%s,%s,%.2f,%s \n",date,moyen,dest,prix,cat);
 		fprintf(fichier,"%s,%s,%s,%.2f,%s \n",date,moyen,dest,prix,cat);
 		printf("Continuer? (y/n) : ");
 		scanf("%s",&cont);
 
 	} while (cont=='y');
 	fclose(fichier);
-
-return 0;
+	return 0;
 }
