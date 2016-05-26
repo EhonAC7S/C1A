@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "menus.h"
 #include "fichiers.h"
 
 /*
@@ -15,10 +14,8 @@ Fonctionnalités du programme :
 */
 
 int main (int argc, char *argv[])  {
-	struct categorie cat1;
-	cat1 = load("test");
-	strcpy(cat1.nom,"test2");
-	save(cat1);
-	printf("%s\n",cat1.nom);
+	struct releve rel;
+	rel = load("test");
+	tri(rel);
 	return 0;
 }

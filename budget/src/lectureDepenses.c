@@ -53,9 +53,3 @@ int main() {
 	fclose(fichier);
 	return ;
 }
-
-
-
-
-
-

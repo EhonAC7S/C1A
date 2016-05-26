@@ -13,7 +13,7 @@ Début du fichier : seuil à ne par dépasser (par semaine ou mois) ;
 Un fichier pour les revenus avec en début de fichier la somme présente sur le compte
 */
 
-int save(struct categorie cat) {
+int save(struct releve cat) {
 	FILE *fp;
 
 	fp = fopen(cat.nom,"w");
@@ -39,8 +39,8 @@ int save(struct categorie cat) {
 	return 0;
 }
 
-struct categorie load(char *fichier) {   //renvoie la structure contenant la catégorie chargée depuis le fichier donné
-	struct categorie cat; //structure que l'on crée
+struct releve load(char *fichier) {   //renvoie la structure contenant la catégorie chargée depuis le fichier donné
+	struct releve cat; //structure que l'on crée
 	strcpy(cat.nom,fichier);
 	FILE *fp;
 
@@ -66,12 +66,52 @@ struct categorie load(char *fichier) {   //renvoie la structure contenant la cat
 		*ret2 = '\0';
         	strcpy(cat.endroit[i],(char*) ret);
         	ret = ret2+1;
-        	ret2 = memchr(ret,(int)'\n', 20);
+        	ret2 = strchr(ret,',');
 		*ret2 = '\0';
         	cat.montant[i] = atof(ret);
+		ret = ret2+1;
+        	ret2 = memchr(ret,(int)'\n', 50);
+		strcpy(cat.categorie[i],(char*) ret);
         	i++;
 		fgets(buf,255,fp);
 	}
 	fclose(fp);
 	return cat;
+}
+
+int tri(struct releve rel) {
+	struct categorie cat[20];
+	int nbcat = 0; //nb de categories dans cat
+	int i,j,k;
+	int trouve = 0;
+	char *categorie;
+	for (i=0;i<sizeof(rel.date);i++) { //On parcourt tous les éléments chargés
+		strcpy(categorie,rel.categorie[i]);
+		for (j=0;j<nbcat;j++) {
+			if (strcmp(cat[j].nom,categorie) == 0) {
+				k = cat[j].nbelements+1;
+				cat[j].date[k]=rel.date[i];
+				cat[j].type[k]=rel.type[i];
+				cat[j].endroit[k]=rel.endroit[i];
+				cat[j].montant[k]=rel.montant[i];
+				cat[j].nbelements++;
+				trouve = 1;
+			}
+		}
+		if (trouve == 0) { //si la categorie n'existe pas encore dans cat
+			cat[nbcat].nom = categorie;
+			cat[nbcat].date[cat[nbcat].nbelements+1]=rel.date[i];
+			cat[nbcat].type[cat[nbcat].nbelements+1]=rel.type[i];
+			cat[nbcat].endroit[cat[nbcat].nbelements+1]=rel.endroit[i];
+			cat[nbcat].montant[cat[nbcat].nbelements+1]=rel.montant[i];
+			cat[nbcat].nbelements++;
+			nbcat++;
+		}
+		trouve = 0;
+	}
+	// À partir d'ici, les transactions sont classées et on n'a plus qu'à les sauvegarder dans les dossiers du nom de la categorie
+	for (i=0;i<nbcat;i++) {
+		save(cat[i]);
+	}
+	return 0;
 }
