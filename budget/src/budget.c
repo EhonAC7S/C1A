@@ -36,7 +36,7 @@ void accueil() {
 			case 3: 
 				saisirReleve();
 				accueil();
-				choixCorrect = 1;
+				choixCorrect = 0;
 				break;
 			case 4:
 				choixCorrect = 1;
