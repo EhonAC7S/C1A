@@ -60,11 +60,8 @@ struct releve load(char *fichier) {
 	fgets(buf,255,fp);  //Les fgets doivent être faits avant de vérifier que l'on n'est pas à la fin du fichier (-> seg fault sinon)
 
 	while (!feof(fp)) { //tant qu'on n'est pas à la fin du fichier
-<<<<<<< HEAD
 		strncpy(dates,buf,10); //copie les 10 premiers caractères de buf dans dates
-=======
 		strncpy(dates,buf,10); //copie les 10 premiers caractères de buf dans cat.dates[i]
->>>>>>> b0d4f13d253cfa0fd5c96f0c1667e1778f663b66
 		strcat(dates,"\0");
 		strcpy(cat.date[i],dates);
         	ret = strchr(buf,',')+1;
