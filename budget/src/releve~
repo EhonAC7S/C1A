@@ -1,7 +1,17 @@
 12/05/2016,liquide,H&M,35.4,habillement
 03/09/2015,liquide,Boulangerie,1.5,nourriture
 06/04/2015,liquide,Boulangerie,5.0,nourriture
+<<<<<<< HEAD
 15/05/2016,CB,auchan,20.00,Imprevu 
 21/12/2016,CB,cadeau,200.00,Extra 
 08/05/2016,Liquide,Julia,50.56,Extra 
-26/05/2016,Chèque,Martin,12.00,Immobilier 
+26/05/2016,Chèque,Martin,12.00,Immobilier
+=======
+26/05/2016,CB,match,19.79,nourriture 
+21/12/1995,Cheque,Naissance,100.00,habillement 
+26/05/2016,Liquide,moi,564.00,habillement 
+27/05/2016,CB,non,23.56,autre 
+27/05/2016,CB,auchan,26.54,habillement 
+25/12/2016,CB,auchan,10.00,habillement 
+30/04/2016,Liquide,H&M,500.00,habillement 
+>>>>>>> b0d4f13d253cfa0fd5c96f0c1667e1778f663b66
