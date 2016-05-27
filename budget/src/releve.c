@@ -72,7 +72,7 @@ void tri() {
 			cat[nbcat].endroit[0] = (char*) calloc(50,sizeof(char));
 			strcpy(cat[nbcat].endroit[0],rel.endroit[i]);
 			cat[nbcat].montant[0]=rel.montant[i];
-			cat[nbcat].nbelements = 0;
+			cat[nbcat].nbelements = 1;
 			saveCat(categorie);
 			nbcat++;
 		}

@@ -100,7 +100,7 @@ struct releve load(char *fichier) {
 int saveCat(char *cat) {
 	FILE *fp;
 
-	fp = fopen("fichiersTries/categories","a+");
+	fp = fopen("fichiersTries/categories","w+");
 	strcat(cat,"\n");
 	fputs(cat,fp);
 
