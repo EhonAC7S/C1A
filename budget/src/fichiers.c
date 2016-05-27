@@ -14,30 +14,32 @@ int save(struct categorie *cat) {
 	//mkdir("fichierTries",EEXIST);  //ne fait rien si le dossier existe, renvoie une erreur de segmentation sinon...
 
 	char *fichier;
+	fichier = (char*) malloc(sizeof(char)*50);
 	strcpy(fichier,"fichiersTries/");
-	strcat(fichier,(*cat).nom);
+	strcat(fichier,cat->nom);
 
 	fp = fopen(fichier,"w+");
 	//On utilise fputs("",fp); pour écrire des trucs
-	int i=0;
-	char chaine[255];
+	int i;
+	char *chaine=(char*) malloc(sizeof(char)*255);
 
-	while ((*cat).montant[i]!=0.) {//for (i=0;i<sizeof(cat.date);i++) {
-		strcpy(chaine,(*cat).date[i]);
+	for (i=0;i<cat->nbelements;i++) {//for (i=0;i<sizeof(cat.date);i++) {
+		strcpy(chaine,cat->date[i]);
 		strcat(chaine,",");
-		strcat(chaine,(*cat).type[i]);
+		strcat(chaine,cat->type[i]);
 		strcat(chaine,",");
-		strcat(chaine,(*cat).endroit[i]);
+		strcat(chaine,cat->endroit[i]);
 		strcat(chaine,",");
 		char str[20];
-		sprintf(str, "%.2f",(*cat).montant[i]);
+		sprintf(str, "%.2f",cat->montant[i]);
 		strcat(chaine,str);
 		strcat(chaine,"\n");
 		fputs(chaine,fp);
-		i++;
 	}
 
 	fclose(fp);
+	free(fichier);
+	free(chaine);
 	return 0;
 }
 
@@ -56,31 +58,36 @@ struct releve load(char *fichier) {
 	char buf[255];
 	char *ret;
 	char *ret2;
-	char dates[10];
+	char *dates;
+	dates = (char*) calloc(11,sizeof(char));
 	fgets(buf,255,fp);  //Les fgets doivent être faits avant de vérifier que l'on n'est pas à la fin du fichier (-> seg fault sinon)
 
 	while (!feof(fp)) { //tant qu'on n'est pas à la fin du fichier
 		strncpy(dates,buf,10); //copie les 10 premiers caractères de buf dans dates
 		strncpy(dates,buf,10); //copie les 10 premiers caractères de buf dans cat.dates[i]
 		strcat(dates,"\0");
+		cat.date[i] = (char*) malloc(sizeof(char)*11);
 		strcpy(cat.date[i],dates);
-        	ret = strchr(buf,',')+1;
-        	ret2 = strchr(ret,',');  //ou : memchr(ret, (int) ',', 20);
+        ret = strchr(buf,',')+1;
+        ret2 = strchr(ret,',');  //ou : memchr(ret, (int) ',', 20);
 		*ret2 = '\0';
-        	strcpy(cat.type[i],(char*) ret);
-        	ret = ret2+1;
-        	ret2 = strchr(ret,',');  //ou : memchr(ret, (int) ',', 50);
+		cat.type[i] = (char*) malloc(sizeof(char)*8);
+        strcpy(cat.type[i],(char*) ret);
+        ret = ret2+1;
+        ret2 = strchr(ret,',');  //ou : memchr(ret, (int) ',', 50);
 		*ret2 = '\0';
-        	strcpy(cat.endroit[i],(char*) ret);
-        	ret = ret2+1;
-        	ret2 = strchr(ret,',');
+		cat.endroit[i] = (char*) malloc(sizeof(char)*50);
+        strcpy(cat.endroit[i],(char*) ret);
+        ret = ret2+1;
+        ret2 = strchr(ret,',');
 		*ret2 = '\0';
-        	cat.montant[i] = atof(ret);
+        cat.montant[i] = atof(ret);
 		ret = ret2+1;
-        	ret2 = memchr(ret,(int)'\n', 50);
+        ret2 = memchr(ret,(int)'\n', 50);
 		*ret2 = '\0';
+		cat.categorie[i] = (char*) malloc(sizeof(char)*20);
 		strcpy(cat.categorie[i],(char*) ret);
-        	i++;
+        i++;
 		fgets(buf,255,fp);
 	}
 
@@ -90,7 +97,16 @@ struct releve load(char *fichier) {
 	return cat;
 }
 
+int saveCat(char *cat) {
+	FILE *fp;
 
+	fp = fopen("fichiersTries/categories","a+");
+	strcat(cat,"\n");
+	fputs(cat,fp);
+
+	fclose(fp);
+	return 0;
+}
 
 
 

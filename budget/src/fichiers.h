@@ -7,20 +7,20 @@ struct categorie {
 	char nom[20];
 	int nbelements;
 	int seuil;
-	char date[255][11];
-	char type[255][8];
-	char endroit[255][50];  // Où les transactions ont été faites
+	char *date[255];
+	char *type[255];
+	char *endroit[255];  // Où les transactions ont été faites
 	float montant[255];
 } ;
 
 struct releve {
 	char nom[20];
 	int nbelements;
-	char categorie[255][20];
+	char *categorie[255];
 	int seuil;
-	char date[255][11];
-	char type[255][8]; // Type de transaction (carte, liquide, chèque)
-	char endroit[255][50];  // Où les transactions ont été faites
+	char *date[255];
+	char *type[255]; // Type de transaction (carte, liquide, chèque)
+	char *endroit[255];  // Où les transactions ont été faites
 	float montant[255];
 } ;
 
@@ -28,7 +28,6 @@ int save(struct categorie *cat);
 
 struct releve load(char *fichier);
 
-void tri();
+int saveCat(char *cat);
 
-int saisirReleve();
 #endif
