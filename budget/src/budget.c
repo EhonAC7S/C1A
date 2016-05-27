@@ -2,19 +2,20 @@
 #include <stdio.h>
 #include <string.h>
 #include "fichiers.h"
+#include "releve.h"
 
 /*
 Projet de C
 Fonctionnalités du programme :
     - classifier dépenses et revenus : charges immobilières, habillement... (sous-catégories possibles)
     - fournir statistiques sur les dépenses/revenus mensuels (eventuellement graphiques)
-            -> chercher une librairie du type matplotlib pour python
     - définir un budget max par poste de dépense et être allerté dès qu'on s'approche du seuil
     - sauvegarder les données dans des fichiers
 */
 
 void accueil() {
-	int choix,choixCorrect;
+	int choix=0,choixCorrect=0;
+	int quitter = 0;
 	printf("\n          *** Gestion de budget ***\n\n\n");
 	printf(" Que souhaitez-vous faire ?\n");
 	printf("    1. Trier le relevé de compte\n");
@@ -41,10 +42,14 @@ void accueil() {
 				break;
 			case 4:
 				choixCorrect = 1;
+				quitter = 1;
 				break;
 			default:
 				break;
 		}
+	}
+	if (quitter == 0) {
+		accueil();
 	}
 }
 

@@ -28,7 +28,7 @@ int save(struct categorie *cat);
 
 struct releve load(char *fichier);
 
-int tri();
+void tri();
 
 int saisirReleve();
 #endif
