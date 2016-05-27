@@ -24,8 +24,10 @@ struct releve {
 	float montant[255];
 } ;
 
-int save(struct categorie cat);
+int save(struct categorie *cat);
 
 struct releve load(char *fichier);
+
+int tri();
 
 #endif

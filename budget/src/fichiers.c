@@ -1,32 +1,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+//#include <sys/types.h>
+//#include <sys/stat.h>
 #include "fichiers.h"
 
 
-int save(struct categorie cat) {
+int save(struct categorie *cat) {
 	//Sauvegarde les données d'une catégorie (notamment utilisé par la fonction tri())
 
 	FILE *fp;
-	
+
+	//mkdir("fichierTries");  //ne fait rien si le dossier existe, renvoie une erreur de segmentation sinon...
+
 	char *fichier;
 	strcpy(fichier,"fichiersTries/");
-	strcat(fichier,cat.nom);
+	strcat(fichier,(*cat).nom);
 
 	fp = fopen(fichier,"w");
 	//On utilise fputs("",fp); pour écrire des trucs
 	int i=0;
 	char chaine[255];
 
-	while (cat.montant[i]!=0.) {//for (i=0;i<sizeof(cat.date);i++) {
-		strcpy(chaine,cat.date[i]);
+	while ((*cat).montant[i]!=0.) {//for (i=0;i<sizeof(cat.date);i++) {
+		strcpy(chaine,(*cat).date[i]);
 		strcat(chaine,",");
-		strcat(chaine,cat.type[i]);
+		strcat(chaine,(*cat).type[i]);
 		strcat(chaine,",");
-		strcat(chaine,cat.endroit[i]);
+		strcat(chaine,(*cat).endroit[i]);
 		strcat(chaine,",");
 		char str[20];
-		sprintf(str, "%.2f", cat.montant[i]);
+		sprintf(str, "%.2f", (*cat).montant[i]);
 		strcat(chaine,str);
 		strcat(chaine,"\n");
 		fputs(chaine,fp);
@@ -56,8 +60,8 @@ struct releve load(char *fichier) {
 	fgets(buf,255,fp);  //Les fgets doivent être faits avant de vérifier que l'on n'est pas à la fin du fichier (-> seg fault sinon)
 
 	while (!feof(fp)) { //tant qu'on n'est pas à la fin du fichier
-		strncpy(dates,buf,10); //copie les 10 premiers caractères de buf dans cat.dates[i]
-		strcat(dates,'\0');
+		strncpy(dates,buf,10); //copie les 10 premiers caractères de buf dans dates
+		strcat(dates,"\0");
 		strcpy(cat.date[i],dates);
         	ret = strchr(buf,',')+1;
         	ret2 = strchr(ret,',');  //ou : memchr(ret, (int) ',', 20);
@@ -125,7 +129,7 @@ int tri() {
 
 	// À partir d'ici, les transactions sont classées et on n'a plus qu'à les sauvegarder dans les dossiers du nom de la categorie
 	for (i=0;i<nbcat;i++) {
-		save(cat[i]);
+		save(&cat[i]);
 	}
 
 	return 0;   //On peut changer ça et mettre void à la fonctions je pense...

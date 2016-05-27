@@ -23,6 +23,7 @@ void accueil() {
 	while (choixCorrect == 0) {
 		printf(" Entrez votre choix : ");
 		scanf("%d",&choix);
+		printf("\n\n");
 		switch (choix) {
 			case 1:
 				tri();
