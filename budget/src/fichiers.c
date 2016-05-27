@@ -11,7 +11,7 @@ int save(struct categorie *cat) {
 
 	FILE *fp;
 
-	//mkdir("fichierTries",EEXIST);  //ne fait rien si le dossier existe, renvoie une erreur de segmentation sinon...
+	//mkdir("fichierTries");  //ne fait rien si le dossier existe, renvoie une erreur de segmentation sinon...
 
 	char *fichier;
 	strcpy(fichier,"fichiersTries/");
