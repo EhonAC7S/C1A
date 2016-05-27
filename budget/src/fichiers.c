@@ -11,13 +11,13 @@ int save(struct categorie *cat) {
 
 	FILE *fp;
 
-	//mkdir("fichierTries");  //ne fait rien si le dossier existe, renvoie une erreur de segmentation sinon...
+	//mkdir("fichierTries",EEXIST);  //ne fait rien si le dossier existe, renvoie une erreur de segmentation sinon...
 
 	char *fichier;
 	strcpy(fichier,"fichiersTries/");
 	strcat(fichier,(*cat).nom);
 
-	fp = fopen(fichier,"w");
+	fp = fopen(fichier,"w+");
 	//On utilise fputs("",fp); pour écrire des trucs
 	int i=0;
 	char chaine[255];
