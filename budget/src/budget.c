@@ -19,7 +19,8 @@ void accueil() {
 	printf(" Que souhaitez-vous faire ?\n");
 	printf("    1. Trier le relevé de compte\n");
 	printf("    2. Afficher les statistiques\n");
-	printf("    3. Quitter l'application\n");
+	printf("    3. Saisir le relevé\n");
+	printf("    4. Quitter l'application\n");
 	while (choixCorrect == 0) {
 		printf(" Entrez votre choix : ");
 		scanf("%d",&choix);
@@ -34,6 +35,11 @@ void accueil() {
 				choixCorrect = 1;
 				break;
 			case 3: 
+				saisirReleve();
+				accueil();
+				choixCorrect = 0;
+				break;
+			case 4:
 				choixCorrect = 1;
 				break;
 			default:

@@ -12,7 +12,7 @@ int main() {
 	char cont='y';
 	int i = 0;
 	char c;
-	fichier = fopen("transaction.info","r");
+	fichier = fopen("releve","r");
 	if (fichier==NULL) {
 		printf("Entrez vos transactions avant !");
 	}

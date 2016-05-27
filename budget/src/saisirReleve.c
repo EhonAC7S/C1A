@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+int saisirReleve() {
 	FILE* fichier = NULL;	
 	char date[10] = "";
 	char moyen[7] = "";
@@ -9,7 +9,7 @@ int main() {
 	double prix;
 	char cat[20] = "";
 	char cont='y';
-	fichier = fopen("transaction.info","a+");
+	fichier = fopen("releve","a+");
 	printf("Veuillez suivre les instructions suivantes : ");
 	do {
 		printf("Entrez une date de la forme : jj/mm/aaaa : ");
@@ -20,15 +20,13 @@ int main() {
 		scanf("%s",dest);
 		printf("Entrez la somme dépensée : ");
 		scanf("%lf",&prix);
-		printf("Entrez la catégorie d'achat parmi Immobilier, Alimentaire, Imprévu, Essence, Extra : ");
+		printf("Entrez la catégorie d'achat parmi les categories existantes : ");
 		scanf("%s",cat);
-		printf(fichier,"%s,%s,%s,%.2f,%s \n",date,moyen,dest,prix,cat);
 		fprintf(fichier,"%s,%s,%s,%.2f,%s \n",date,moyen,dest,prix,cat);
 		printf("Continuer? (y/n) : ");
 		scanf("%s",&cont);
 
 	} while (cont=='y');
 	fclose(fichier);
-
-return 0;
+	return 0;
 }

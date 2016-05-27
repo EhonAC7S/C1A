@@ -60,7 +60,11 @@ struct releve load(char *fichier) {
 	fgets(buf,255,fp);  //Les fgets doivent être faits avant de vérifier que l'on n'est pas à la fin du fichier (-> seg fault sinon)
 
 	while (!feof(fp)) { //tant qu'on n'est pas à la fin du fichier
+<<<<<<< HEAD
 		strncpy(dates,buf,10); //copie les 10 premiers caractères de buf dans dates
+=======
+		strncpy(dates,buf,10); //copie les 10 premiers caractères de buf dans cat.dates[i]
+>>>>>>> b0d4f13d253cfa0fd5c96f0c1667e1778f663b66
 		strcat(dates,"\0");
 		strcpy(cat.date[i],dates);
         	ret = strchr(buf,',')+1;
@@ -134,3 +138,71 @@ int tri() {
 
 	return 0;   //On peut changer ça et mettre void à la fonctions je pense...
 }
+
+int saisirReleve() {
+	FILE* fichier = NULL;	
+	char date[10] = "";
+	char moyen[7] = "";
+	char dest[20] = "";
+	double prix;
+	char cat[20] = "";
+	char cont='y';
+	fichier = fopen("releve","a+");
+	printf("Veuillez suivre les instructions suivantes : ");
+	do {
+		printf("Entrez une date de la forme : jj/mm/aaaa : ");
+		scanf("%s",date);
+		printf("Entrez le moyen de transaction parmis 'CB','Liquide' et 'Chèque' : ");
+		scanf("%s",moyen);
+		printf("Entrez le destinataire (Max 20 caractères sans espace) : ");
+		scanf("%s",dest);
+		printf("Entrez la somme dépensée : ");
+		scanf("%lf",&prix);
+		printf("Entrez la catégorie d'achat parmi les categories existantes : ");
+		scanf("%s",cat);
+		fprintf(fichier,"%s,%s,%s,%.2f,%s \n",date,moyen,dest,prix,cat);
+		printf("Continuer? (y/n) : ");
+		scanf("%s",&cont);
+
+	} while (cont=='y');
+	fclose(fichier);
+	return 0;
+}
+/*
+int creerCatgorieUt() {
+	FILE* fichier = NULL;
+	double seuil;
+	char cat[20] = "";
+	char souscat[20] = "";
+	char cont='y';
+	char chaine[1000] = "";
+	fichier = fopen("catégorie.info","a+");
+	while (fgets(chaine, 1000, fichier) != NULL) // On lit le fichier tant qu'on ne reçoit pas d'erreur (NULL)
+        {
+            printf("%s", chaine); // On affiche la chaîne qu'on vient de lire
+        }
+ 
+        fclose(fichier);
+	printf("Veuillez suivre les instructions suivantes : ");
+	do {
+		printf(" ");
+		scanf("%s",date);
+		printf("Entrez le moyen de transaction parmis 'CB','Liquide' et 'Chèque' : ");
+		scanf("%s",moyen);
+		printf("Entrez le destinataire (Max 20 caractères sans espace) : ");
+		scanf("%s",dest);
+		printf("Entrez la somme dépensée : ");
+		scanf("%lf",&prix);
+		printf("Entrez la catégorie d'achat parmi les categories existantes : ");
+		scanf("%s",cat);
+		fprintf(fichier,"%s,%s,%s,%.2f,%s \n",date,moyen,dest,prix,cat);
+		printf("Continuer? (y/n) : ");
+		scanf("%s",&cont);
+
+	} while (cont=='y');
+	fclose(fichier);
+	return 0;
+}*/
+	//revoir la conception de la gestion de l'architecture des categories! plutot voir cela comme un arbre a 3 niveaux
+	//gestion de la sauvegarde d'un arbre en memoire dans un fichier texte (parcours en profondeur)
+
