@@ -8,13 +8,15 @@ struct categorie {
 	int nbelements;
 	int seuil;
 	char *date[255];
+	int jour[255];  //sert à triCatDates
+	int mois[255];
+	int annee[255];
 	char *type[255];
 	char *endroit[255];  // Où les transactions ont été faites
 	float montant[255];
 } ;
 
 struct releve {
-	char nom[20];
 	int nbelements;
 	char *categorie[255];
 	int seuil;
@@ -29,5 +31,9 @@ int save(struct categorie *cat);
 struct releve load(char *fichier);
 
 int saveCat(char *cat);
+
+struct categorie triChrono(struct categorie *cat, int i);
+
+void triCatDates(struct categorie *cat);
 
 #endif

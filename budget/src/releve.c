@@ -81,6 +81,14 @@ void tri() {
 
 	// À partir d'ici, les transactions sont classées et on n'a plus qu'à les sauvegarder dans les dossiers du nom de la categorie
 	for (i=0;i<nbcat;i++) {
-		save(&cat[i]);
+		triCatDates(&cat[i]);
+	}
+
+	for (i=0;i<nbcat;i++) {
+		for (j=0;j<cat[i].nbelements;j++) {
+			free(cat[i].date[j]);
+			free(cat[i].type[j]);
+			free(cat[i].endroit[j]);
+		}
 	}
 }

@@ -1,11 +1,8 @@
 budget: budget.o fichiers.o releve.o
 	gcc -g -o budget budget.o fichiers.o releve.o
 
-budget.o: budget.c
-	gcc -g -c budget.c
+*.o: *.c
+	gcc -g -c *.c
 
-fichiers.o: fichiers.c
-	gcc -g -c fichiers.c
-
-releve.o: releve.c
-	gcc -g -c releve.c
+clean:
+	rm −f *~ *.o
