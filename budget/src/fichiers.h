@@ -19,6 +19,7 @@ struct categorie {
 struct releve {
 	int nbelements;
 	char *categorie[255];
+	char *sscategorie[255];
 	float seuil;
 	char *date[255];
 	char *type[255]; // Type de transaction (carte, liquide, chèque)
@@ -28,12 +29,16 @@ struct releve {
 
 int save(struct categorie *cat);
 
-struct releve load(char *fichier);
+struct releve *load(char *fichier);
 
-int saveCat(char *cat);
+struct categorie *loadCat(char *fichier);
+
+//int saveCat(char *cat);
 
 struct categorie triChrono(struct categorie *cat, int i);
 
-void triCatDates(struct categorie *cat);
+void triSsCatDates(struct categorie *cat);
+
+void triCatDates(catTree1 *cat);
 
 #endif

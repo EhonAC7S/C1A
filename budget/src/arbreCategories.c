@@ -3,8 +3,8 @@
 #include <string.h>
 #include "arbreCategories.h"
 
-catTree0* loadArbre(char* fichier) {
-	catTree0* arbre = (struct catTree0)* malloc(sizeof(struct catTree0));
+struct catTree0* loadArbre(char* fichier) {
+	catTree0* arbre = (struct catTree0*) malloc(sizeof(struct catTree0));
 	FILE* txtcat;
 	txtcat = fopen(fichier,"r");
 	int i=0;

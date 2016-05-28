@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "fichiers.h"
+#include "stats.h"
 #include "releve.h"
 
 /*
@@ -33,6 +34,7 @@ void accueil() {
 				choixCorrect = 1;
 				break;
 			case 2:
+				accueilStats();
 				choixCorrect = 1;
 				break;
 			case 3: 
