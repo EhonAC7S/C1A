@@ -2,7 +2,7 @@
 #define FICHIERS
 
 //enum transac {cb="CB",l="liquide",ch="cheque"};  //type de transaction
-
+typedef struct categorie categorie;
 struct categorie {
 	char nom[20];
 	int nbelements;
