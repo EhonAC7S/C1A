@@ -41,3 +41,6 @@ Ecriture de la fonction de tri du relevé en catégories. Celle-ci ne fonctionne
 *Erreur de ségmentation corrigée par l'ajout d'un attribut nbelements à la structure relevé (permet d'éviter de devoir parcourir tout le tableau date ce qui faisait lire de la mémoire non autorisée.
 *Problème d'indices de tableau résolu (décallage de 1)
 *Je ne vois plus d'erreur à cette fonction pour le moment : elle range ce que je lui demande de ranger. Je pense faire l'appel à la fonction load() dans la fonction tri() pour éviter de le faire manuellement dans le main().
+
+*Harmonisation du code entre nous deux. (grace au menu d'acceuil, et selction de termes communs pour la gestion de fichier et struture)
+*mise en place de la gestion avancée des categories : creation de categories et sous categories par l'utilisateur, la conception/modelisation suppose la creation d'arbre (a 3 niveaux) pour gerer cela (seuil modifiable, categories et sous categories eventuelles) plus une sauvegarde et un cahrgement depuis un fichier des parametres. (parcours en profondeur?)

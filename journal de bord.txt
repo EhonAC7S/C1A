@@ -44,3 +44,11 @@ Ecriture de la fonction de tri du relevé en catégories. Celle-ci ne fonctionne
 
 *Harmonisation du code entre nous deux. (grace au menu d'acceuil, et selction de termes communs pour la gestion de fichier et struture)
 *mise en place de la gestion avancée des categories : creation de categories et sous categories par l'utilisateur, la conception/modelisation suppose la creation d'arbre (a 3 niveaux) pour gerer cela (seuil modifiable, categories et sous categories eventuelles) plus une sauvegarde et un cahrgement depuis un fichier des parametres. (parcours en profondeur?)
+
+27 mai :
+
+*Débugage du code et amélioration de la gestion des pointeurs. Gestion de la mémoire fonctionnelle.
+*Début du développement du tri des opérations par date pour chaque catégorie.
+
+28 mai : 
+*terminaison de la fonction de tri par dates. Celle-ci ne semble plus provoquer de bugs. (utilisation d'algorithmes de tri, ajout de trois attributs à la structures categorie : jour, mois et année.
