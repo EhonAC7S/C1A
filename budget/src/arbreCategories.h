@@ -5,6 +5,7 @@
 typedef enum {true,false} boolean;
 //structure d'abre pour gerer les categories en 3 niveaux
 
+
 typedef struct catTree1 catTree1;
 struct catTree1 { //niveau 1 de l'arbre
 	char name[20];

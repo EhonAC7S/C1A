@@ -4,6 +4,7 @@
 #include "arbreCategories.h"
 #include "fichiers.h"
 
+
 catTree0* loadArbre(char* fichier) {
 	catTree0* arbre = (catTree0*) malloc(sizeof(catTree0));
 	FILE* txtcat;
