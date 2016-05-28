@@ -3,8 +3,8 @@
 #include <string.h>
 #include "arbreCategories.h"
 
-(struct catTree0)* loadArbre(char* fichier); {
-	(struct catTree0)* arbre = (struct catTree0)* malloc(sizeof(struct catTree0));
+catTree0* loadArbre(char* fichier) {
+	catTree0* arbre = (struct catTree0)* malloc(sizeof(struct catTree0));
 	FILE* txtcat;
 	txtcat = fopen(fichier,"r");
 	int i=0;
@@ -22,7 +22,7 @@
 		*ret2 = '\0';
         strcpy(categorie,(char*) ret);
         if (strcmp(categorie,categorie2) != 0) {
-        	(struct catTree1)* arbre1 = (struct catTree1)* malloc(sizeof(struct catTree1));
+        	catTree1* arbre1 = catTree1* malloc(sizeof(catTree1));
         	arbre->nbelements = arbre->nbelements +1;
         	arbre->fils[i] = arbre1;
         	arbre1->papa=arbre;
@@ -35,7 +35,7 @@
         ret2 = strchr(ret,',');  //ou : memchr(ret, (int) ',', 50);
 		*ret2 = '\0';
         strcpy(subcategorie,(char*) ret);
-        (struct catTree2)* arbre2 = (struct catTree2)* malloc(sizeof(struct catTree2));
+        catTree2* arbre2 = catTree2* malloc(sizeof(catTree2));
         arbre1->nbelements=arbre1->nbelements +1;
         arbre1->subcat[j]=arbre2;
         arbre2->papa=arbre1;
@@ -53,7 +53,7 @@
 	return arbre;
 }
 
-int saveArbre((struct catTree0)* arbre) {
+int saveArbre(catTree0* arbre) {
 	FILE* fichier = NULL;	
 	char categorie[20] = "";
 	char subcategorie[20] = "";
@@ -63,9 +63,9 @@ int saveArbre((struct catTree0)* arbre) {
 	char* chaine=(char*) malloc(sizeof(char)*255);
 	fichier = fopen("ensembleDesCategories.info","w+");
 	for (i=0;i<arbre->nbelements;i++) {
-		catTree1* ifils = arbre->fils[i];
+		catTree1* ifils = (arbre->fils[i]);
 		for (j=0;j<ifils->nbelements;j++) {
-			strcpy(chaine,ifils->name);
+			strcpy(chaine,(ifils->name));
 			strcat(chaine,",");
 			strcat(chaine,((ifils->subcat[j])->cat)->nom);
 			strcat(chaine,",");
@@ -80,7 +80,7 @@ int saveArbre((struct catTree0)* arbre) {
 	return 0;
 }
 
-int editTreeCat((struct catTree0)* arbre) {
+int editTreeCat(catTree0* arbre) {
 	char categorie[20] = "";
 	char subcategorie[20];
 	float seuil;
@@ -125,19 +125,19 @@ int editTreeCat((struct catTree0)* arbre) {
 				}
 				if (did==0) {
 					i=arbre->nbelements;
-					(struct catTree1)* arbre1 = (struct catTree1)* malloc(sizeof(struct catTree1));
+					catTree1* arbre1 = catTree1* malloc(sizeof(catTree1));
         			arbre->fils[i] = arbre1;
         			arbre->nbelements = arbre->nbelements +1;
         			arbre1->papa=arbre;
         			strcpy(arbre1->name,categorie);
-        			j=ifils->nbelements;
-					(struct catTree2)* arbre2 = (struct catTree2)* malloc(sizeof(struct catTree2));
+        			j=fils[i]->nbelements;
+					catTree2* arbre2 = catTree2* malloc(sizeof(catTree2));
 					ifils->subcat[j]=arbre2;
         			arbre2->papa=ifils;
         			strcpy((arbre2->cat)->nom,subcategorie);
         		}
         		reequilibreSeuil(arbre);
-        		editTreeCat();
+        		editTreeCat(arbre);
 				choixCorrect = 0;
 				break;
 			case 2:
@@ -149,7 +149,7 @@ int editTreeCat((struct catTree0)* arbre) {
 					catTree1* ifils = arbre->fils[i];
 					if (strcmp(ifils->name,categorie)==0) {
 						for (j=0;j<ifils->nbelements;j++) {
-							if (strcmp(ifils->subcat[j]->cat->nom,subcategorie)==0) {
+							if (strcmp(((ifils->subcat[j])->cat)->nom,subcategorie)==0) {
 								free(ifils->subcat[j]->cat);
 								free(ifils->subcat[j]);
 								ifils->nbelements=(ifils->nbelements)-1;
@@ -166,7 +166,7 @@ int editTreeCat((struct catTree0)* arbre) {
 					}
 				}
 				reequilibreSeuil(arbre);
-				editTreeCat();
+				editTreeCat(arbre);
 				choixCorrect = 0;
 				break;
 			case 3: 
@@ -175,10 +175,10 @@ int editTreeCat((struct catTree0)* arbre) {
 				printf("Entrez la sous-catégorie : ");
 				scanf("%s",subcategorie);
 				printf("Entrez le seuil : ");
-				scanf("%lf",&seuil);
+				scanf("%f",&seuil);
 				for (i=0;i<arbre->nbelements;i++) {
 					catTree1* ifils = arbre->fils[i];
-					if (strcmp(ifils->name,categorie)==0) {
+					if (strcmp((ifils->name),categorie)==0) {
 						for (j=0;j<ifils->nbelements;j++) {
 							if (strcmp(ifils->subcat[j]->cat->nom,subcategorie)==0) {
 								ifils->subcat[j]->cat->seuil=seuil;
@@ -187,7 +187,7 @@ int editTreeCat((struct catTree0)* arbre) {
 					}
 				}
         		reequilibreSeuil(arbre);
-        		editTreeCat();
+        		editTreeCat(arbre);
 				choixCorrect = 0;
 				break;
 			case 4:
@@ -198,7 +198,9 @@ int editTreeCat((struct catTree0)* arbre) {
 		}
 	}
 }
-int reequilibreSeuil((struct catTree0)* arbre) {
+int reequilibreSeuil(catTree0* arbre) {
+	int i=0;
+	int j=0;
 	float countsub = 0.;
 	float count = 0.;
 	for (i=0;i<arbre->nbelements;i++) {
