@@ -6,7 +6,7 @@
 struct categorie {
 	char nom[20];
 	int nbelements;
-	int seuil;
+	float seuil;
 	char *date[255];
 	int jour[255];  //sert à triCatDates
 	int mois[255];
@@ -19,7 +19,7 @@ struct categorie {
 struct releve {
 	int nbelements;
 	char *categorie[255];
-	int seuil;
+	float seuil;
 	char *date[255];
 	char *type[255]; // Type de transaction (carte, liquide, chèque)
 	char *endroit[255];  // Où les transactions ont été faites

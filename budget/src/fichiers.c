@@ -100,7 +100,7 @@ int saveCat(char *cat) {
 	//Ajoute une catégorie au fichier recençant les categories
 	FILE *fp;
 
-	fp = fopen("fichiersTries/categories","a+");
+	fp = fopen("fichiersTries/categories","w+");
 	strcat(cat,"\n");
 	fputs(cat,fp);
 
