@@ -25,7 +25,7 @@ int saisirReleve() {
 		scanf("%lf",&prix);
 		printf("Entrez la catégorie d'achat parmi les categories existantes : ");
 		scanf("%s",cat);
-		fprintf(fichier,"%s,%s,%s,%.2f,%s \n",date,moyen,dest,prix,cat);
+		fprintf(fichier,"%s,%s,%s,%.2f,%s\n",date,moyen,dest,prix,cat);
 		printf("Continuer? (y/n) : ");
 		scanf("%s",&cont);
 
