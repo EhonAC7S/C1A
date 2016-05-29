@@ -14,11 +14,9 @@ catTree0* loadArbre(char* fichier) {
 	char buf[255];
 	char *ret;
 	char *ret2;
-	char categorie[20] = "";
+	char categorie[20];
 	char subcategorie[20];
 	float seuil;
-	catTree1* arbre1;
-	struct categorie* sscat;
 	fgets(buf,255,txtcat);
 
 
@@ -29,7 +27,7 @@ catTree0* loadArbre(char* fichier) {
         strcpy(categorie,(char*) ret);
         trouve = 0;
         for (i=0;i<arbre->nbelements;i++) {
-        	if (strcmp(categorie,arbre->fils[i]->name) != 0) {
+        	if (strcmp(categorie,arbre->fils[i]->name) == 0) {
         		trouve = 1;
         		j=i;
         	}
@@ -41,7 +39,6 @@ catTree0* loadArbre(char* fichier) {
         	j=arbre->nbelements;
         	arbre->nbelements = arbre->nbelements +1;
         }
-
         ret = ret2+1;
         ret2 = strchr(ret,',');  //ou : memchr(ret, (int) ',', 50);
 		*ret2 = '\0';
@@ -101,7 +98,7 @@ int editTreeCat(catTree0* arbre) {
 		catTree1* ifils = arbre->fils[i];
 		printf("%s\n",ifils->name);
 		for (j=0;j<ifils->nbelements;j++) {
-			printf("%s,%.2f\n",(ifils->subcat[j])->nom,(ifils->subcat[j])->seuil);
+			printf("   %s,%.2f\n",(ifils->subcat[j])->nom,(ifils->subcat[j])->seuil);
 		}
 	}
 	int choix=0,choixCorrect=0;
@@ -226,7 +223,8 @@ int reequilibreSeuil(catTree0* arbre) {
 
 int gestionCategories() {
 	
-	catTree0* arbre = loadArbre("fichiersTries/ensembleDesCategories.info"); //il faut load le fichier comprennant le listing des cat et ss cat pour creer l'arbre
+	catTree0* arbre = (catTree0*) malloc(sizeof(catTree0));
+	arbre = loadArbre("fichiersTries/ensembleDesCategories.info"); //il faut load le fichier comprennant le listing des cat et ss cat pour creer l'arbre
 	editTreeCat(arbre);
 	//proposer de rajouter une categorie, ou de modifier le seuil d'une cat/sscat existante en modifiant l'arbre
 	saveArbre(arbre); //finir en restockant l'arbre modifié dans le fichier texte

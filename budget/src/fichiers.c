@@ -107,6 +107,54 @@ releve* load(char *fichier) {
 	return cat;
 }
 
+
+struct categorie *loadCat(char *fichier) {   
+	//Renvoie une structure contenant tous les éléments d'une catégorie
+
+	struct categorie *cat = (struct categorie*) malloc(sizeof(struct categorie));; //structure que l'on crée
+	strcpy(cat->nom,fichier);
+	FILE *fp;
+
+	fp = fopen(fichier,"r");
+	int i=0;
+	char buf[255];
+	char *ret;
+	char *ret2;
+	char *dates;
+	dates = (char*) calloc(11,sizeof(char));
+	fgets(buf,255,fp);  //Les fgets doivent être faits avant de vérifier que l'on n'est pas à la fin du fichier (-> seg fault sinon)
+
+	while (!feof(fp)) { //tant qu'on n'est pas à la fin du fichier
+		strncpy(dates,buf,10); //copie les 10 premiers caractères de buf dans dates
+		strncpy(dates,buf,10); //copie les 10 premiers caractères de buf dans cat.dates[i]
+		strcat(dates,"\0");
+		cat->date[i] = (char*) malloc(sizeof(char)*11);
+		strcpy(cat->date[i],dates);
+        ret = strchr(buf,',')+1;
+        ret2 = strchr(ret,',');  //ou : memchr(ret, (int) ',', 20);
+		*ret2 = '\0';
+		cat->type[i] = (char*) malloc(sizeof(char)*8);
+        strcpy(cat->type[i],(char*) ret);
+        ret = ret2+1;
+        ret2 = strchr(ret,',');  //ou : memchr(ret, (int) ',', 50);
+		*ret2 = '\0';
+		cat->endroit[i] = (char*) malloc(sizeof(char)*50);
+        strcpy(cat->endroit[i],(char*) ret);
+        ret = ret2+1;
+		ret2 = memchr(ret,(int)'\n', 50);
+		*ret2 = '\0';
+        cat->montant[i] = atof(ret);
+        i++;
+		fgets(buf,255,fp);
+	}
+
+	fclose(fp);
+	cat->nbelements = i;
+
+	return cat;
+}
+
+
 struct categorie triChrono(struct categorie *cat, int i) {
 	//Inverse deux valeurs dans une categorie
 

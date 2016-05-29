@@ -40,28 +40,39 @@ void depenses() {
 	char *date = (char*) malloc(sizeof(char)*8);
 	printf("De quel mois souhaitez-vous consulter les statistiques ? (format mm/aaaa)\n");
     scanf("%s",date);
+    printf("\n\n\n");
 	int mois,annee;
 	char *ret = (char*) calloc(11,sizeof(char));
 	strncpy(ret,date,2);
     mois = atoi(ret);
     ret = strchr(date,'/')+1;
     annee = atoi(ret);
-    free(ret); free(date);
-    FILE *fp;
+    //free(ret); 
+    //free(date);
+    //FILE *fp;
 
-	char *fichier;
-	fichier = (char*) malloc(sizeof(char)*50);
-	strcpy(fichier,"fichiersTries/categories");
+    catTree0* arbre = (catTree0*) malloc(sizeof(catTree0));
+    arbre = loadArbre("fichiersTries/ensembleDesCategories.info");
+    char* fichier = (char*) malloc(sizeof(char)*50);
 
-	fp = fopen(fichier,"r");
-	char buf[255];
-
-	fgets(buf,255,fp);
-	char *nom = (char*) malloc(20*sizeof(char));
-
-	while (!feof(fp)) {
-		strcpy(nom,buf);
-		fgets(buf,255,fp);
-	}
-	fclose(fp);
+    int i,j,k;
+    for (i=0;i<arbre->nbelements;i++) {
+    	printf("Catégorie %s :\n", arbre->fils[i]->name);
+    	float sommeCat = 0.;
+    	for (j=0;j<arbre->fils[i]->nbelements;j++) {
+    		categorie* cat = (struct categorie*) malloc(sizeof(struct categorie));
+    		strcpy(fichier,"fichiersTries/");
+    		strcat(fichier,arbre->fils[i]->name);
+    		strcat(fichier,"/");
+    		strcat(fichier,arbre->fils[i]->subcat[j]->nom);
+    		cat = loadCat(fichier);
+    		float somme = 0.;
+    		for (k=0;k<cat->nbelements;k++) {
+    			somme = somme + cat->montant[k];
+    		}
+    		printf("%s : %.2f\n", cat->nom, somme);
+    		sommeCat = sommeCat + somme;
+    	}
+    	printf("Les dépenses pour la catégorie %s ont été de : %f\n", arbre->fils[i]->name,sommeCat);
+    }
 }

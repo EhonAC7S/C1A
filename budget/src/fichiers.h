@@ -30,6 +30,8 @@ releve *load(char *fichier);
 
 categorie *loadCat(char *fichier);
 
+struct categorie *loadCat(char *fichier);
+
 categorie triChrono(categorie *cat, int i);
 
 void triSsCatDates(categorie *cat);
