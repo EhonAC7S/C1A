@@ -5,7 +5,6 @@
 #include "fichiers.h"
 #include "arbreCategories.h"
 
-
 void accueilStats() {
 	int choix=0,choixCorrect=0;
 	int quitter = 0;
@@ -27,7 +26,6 @@ void accueilStats() {
 				break;
 		}
 	}
-	
 }
 
 void depenses() {
@@ -64,6 +62,7 @@ void depenses() {
     		cat = loadCat(fichier,arbre->fils[i]->subcat[j]->nom);
     		float somme = 0.;
     		triSsCatDates(cat);
+    		cat->seuil = arbre->fils[i]->subcat[j]->seuil;
     		for (k=0;k<cat->nbelements;k++) {
     			if (cat->mois[k]==mois && cat->annee[k]==annee) {
     				somme = somme + cat->montant[k];
@@ -71,7 +70,7 @@ void depenses() {
     		}
     		printf("    %s : %.2f\n", cat->nom, somme);
     		if (somme > cat->seuil) {
-    			printf("           Dépassement du seuil de : %.2f (seuil fixé à : %.2f)\n", somme-cat->seuil,cat->seuil);
+    			printf("           Dépassement du seuil de : %.2f (seuil fixé à : %.2f)\n", somme-(cat->seuil),cat->seuil);
     		} else {
     			printf("           Seuil fixé à : %.2f\n",cat->seuil);
     		}
