@@ -11,7 +11,6 @@ void accueilStats() {
 	printf("\n\n   À quelle type de statistiques souhaitez-vous avoir accès ?\n");
 	printf(" 1. Dépenses sur un mois\n");
 	printf(" 2. Revenir à l'accueil\n");
-	printf(" 3. Quitter\n");
 	while (choixCorrect == 0) {
 		printf(" Entrez votre choix : ");
 		scanf("%d",&choix);
@@ -19,19 +18,15 @@ void accueilStats() {
 		switch (choix) {
 			case 1:
 				depenses();
-				choixCorrect = 1;
 				break;
 			case 2:
 				choixCorrect = 1;
-				break;
-			case 3:
-				choixCorrect = 1;
-				quitter = 1;
 				break;
 			default:
 				break;
 		}
 	}
+	accueil();
 }
 
 void depenses() {
@@ -74,6 +69,11 @@ void depenses() {
     			}
     		}
     		printf("    %s : %.2f\n", cat->nom, somme);
+    		if (somme > cat->seuil) {
+    			printf("           Dépassement du seuil de : %.2f (seuil fixé à : %.2f)\n", somme-cat->seuil,cat->seuil);
+    		} else {
+    			printf("           Seuil fixé à : %.2f\n",cat->seuil);
+    		}
     		sommeCat = sommeCat + somme;
     	}
     	printf("  Les dépenses pour la catégorie %s ont été de : %.2f\n", arbre->fils[i]->name,sommeCat);

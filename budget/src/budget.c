@@ -50,6 +50,7 @@ void accueil() {
 			case 5:
 				choixCorrect = 1;
 				quitter = 1;
+				break;
 			default:
 				break;
 		}

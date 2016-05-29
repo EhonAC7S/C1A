@@ -4,6 +4,7 @@
 #include "fichiers.h"
 #include "arbreCategories.h"
 
+
 catTree0* loadArbre(char* fichier) {
 	catTree0* arbre = (catTree0*) malloc(sizeof(catTree0));
 	FILE* txtcat;
@@ -18,7 +19,6 @@ catTree0* loadArbre(char* fichier) {
 	char subcategorie[20];
 	float seuil;
 	fgets(buf,255,txtcat);
-
 
 	while (!feof(txtcat)) { //tant qu'on n'est pas à la fin du fichier
         ret = buf;
@@ -114,7 +114,7 @@ int editTreeCat(catTree0* arbre) {
 		printf("\n\n");
 		switch (choix) {
 			case 1:
-				printf("Entrez la catégorie (créé si inexistante) : ");
+				printf("Entrez la catégorie (créée si inexistante) : ");
 				scanf("%s",categorie);
 				printf("Entrez la sous-catégorie : ");
 				scanf("%s",subcategorie);
@@ -201,6 +201,8 @@ int editTreeCat(catTree0* arbre) {
 				break;
 		}
 	}
+	saveArbre(arbre);
+	accueil();
 }
 int reequilibreSeuil(catTree0* arbre) {
 	int i=0;
@@ -223,8 +225,7 @@ int reequilibreSeuil(catTree0* arbre) {
 
 int gestionCategories() {
 	
-	catTree0* arbre = (catTree0*) malloc(sizeof(catTree0));
-	arbre = loadArbre("fichiersTries/ensembleDesCategories.info"); //il faut load le fichier comprennant le listing des cat et ss cat pour creer l'arbre
+	catTree0* arbre = loadArbre("fichiersTries/ensembleDesCategories.info"); //il faut load le fichier comprennant le listing des cat et ss cat pour creer l'arbre
 	editTreeCat(arbre);
 	//proposer de rajouter une categorie, ou de modifier le seuil d'une cat/sscat existante en modifiant l'arbre
 	saveArbre(arbre); //finir en restockant l'arbre modifié dans le fichier texte
