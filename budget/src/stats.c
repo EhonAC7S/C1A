@@ -54,12 +54,11 @@ void depenses() {
     	printf("Catégorie %s :\n", arbre->fils[i]->name);
     	float sommeCat = 0.;
     	for (j=0;j<arbre->fils[i]->nbelements;j++) {
-    		categorie* cat;
     		strcpy(fichier,"fichiersTries/");
     		strcat(fichier,arbre->fils[i]->name);
     		strcat(fichier,"/");
     		strcat(fichier,arbre->fils[i]->subcat[j]->nom);
-    		cat = loadCat(fichier,arbre->fils[i]->subcat[j]->nom);
+    		categorie* cat = loadCat(fichier,arbre->fils[i]->subcat[j]->nom);
     		float somme = 0.;
     		triSsCatDates(cat);
     		cat->seuil = arbre->fils[i]->subcat[j]->seuil;
@@ -72,7 +71,11 @@ void depenses() {
     		if (somme > cat->seuil) {
     			printf("           Dépassement du seuil de : %.2f (seuil fixé à : %.2f)\n", somme-(cat->seuil),cat->seuil);
     		} else {
-    			printf("           Seuil fixé à : %.2f\n",cat->seuil);
+                if (somme > (cat->seuil)*0.8) {
+                       printf("           Vous êtes proche du seuil fixé à : %.2f\n",cat->seuil); 
+                } else {
+                    printf("           Seuil fixé à : %.2f\n",cat->seuil);
+                }
     		}
     		sommeCat = sommeCat + somme;
     	}
