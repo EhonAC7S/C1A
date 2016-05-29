@@ -103,6 +103,7 @@ int saveArbre(catTree0* arbre) {
 int editTreeCat(catTree0* arbre) {
 	char categori[20] = "";
 	char subcategorie[20];
+	char charSeuil[15];
 	float seuil;
 	int did=0;
 	categorie* sscat;
@@ -135,6 +136,7 @@ int editTreeCat(catTree0* arbre) {
 				scanf("%s",subcategorie);
 				printf("Entrez le seuil : ");
 				scanf("%f",&seuil);
+				//seuil = atof(charSeuil);
 				for (i=0;i<arbre->nbelements;i++) {
 					catTree1* ifils = arbre->fils[i];
 					if (strcmp(ifils->name,categori)==0) {
@@ -142,6 +144,8 @@ int editTreeCat(catTree0* arbre) {
 						sscat = (categorie*) malloc(sizeof(categorie));
 						ifils->subcat[j]=sscat;
         				strcpy(sscat->nom,subcategorie);
+        				sscat->seuil = seuil;
+        				ifils->nbelements = ifils->nbelements + 1;
         				did=1;
 					}
 				}
@@ -152,9 +156,10 @@ int editTreeCat(catTree0* arbre) {
         			arbre->nbelements = arbre->nbelements +1;
         			strcpy(arbre1->name,categori);
         			int j=(arbre->fils[i])->nbelements;
-					sscat = (categorie*) malloc(sizeof(categorie));
-					arbre->fils[i]->subcat[j]=sscat;
-        			strcpy(sscat->nom,subcategorie);
+					(arbre->fils[i])->subcat[j] = (categorie*) malloc(sizeof(categorie));
+        			strcpy(((arbre->fils[i])->subcat[j])->nom,subcategorie);
+        			(arbre->fils[i])->subcat[j]->seuil = seuil;
+        			(arbre->fils[i])->nbelements = (arbre->fils[i])->nbelements + 1;
         		}
         		reequilibreSeuil(arbre);
         		editTreeCat(arbre);
@@ -195,6 +200,7 @@ int editTreeCat(catTree0* arbre) {
 				scanf("%s",subcategorie);
 				printf("Entrez le seuil : ");
 				scanf("%f",&seuil);
+				//seuil = atof(charSeuil);
 				for (i=0;i<arbre->nbelements;i++) {
 					catTree1* ifils = arbre->fils[i];
 					if (strcmp((ifils->name),categori)==0) {

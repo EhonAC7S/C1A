@@ -45,8 +45,9 @@ int save(catTree1* cat) {
 		fclose(fp);
 		free(fichier);
 		free(chaine);
+
 	}
-	//free(cat);    //vérifier que ça fonctionne bien
+	
 	return 0;
 }
 
@@ -148,10 +149,9 @@ struct categorie *loadCat(char *fichier,char *nom) {
         i++;
 		fgets(buf,255,fp);
 	}
-
 	fclose(fp);
 	cat->nbelements = i;
-
+	free(dates);
 	return cat;
 }
 
@@ -261,6 +261,9 @@ void triSsCatDates(struct categorie *cat) {
 			}
 		}
 	}
+	free(dateJ);
+	free(ret);
+	free(ret2);
 }
 
 void triCatDates(catTree1 *cat) {

@@ -117,16 +117,6 @@ void tri() {
 	for (i=0;i<arbre->nbelements;i++) {
 		triCatDates(arbre->fils[i]);
 	}
-
 	saveArbre(arbre);
-	/*
-	for (i=0;i<arbre->nbelements;i++) {  //Libération de la mémoire
-		for (j=0;j<arbre->fils[i]->nbelements;j++) {
-			for (k=0;k<arbre->fils[i]->subcat[j]->nbelements;k++) {
-				free(arbre->fils[i]->subcat[j]->date[j]);
-				free(arbre->fils[i]->subcat[j]->type[j]);
-				free(arbre->fils[i]->subcat[j]->endroit[j]);
-			}
-		}
-	}*/
+	freeArbre(arbre);
 }

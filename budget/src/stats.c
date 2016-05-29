@@ -8,10 +8,10 @@
 void accueilStats() {
 	int choix=0,choixCorrect=0;
 	int quitter = 0;
-	printf("\n\n   À quelle type de statistiques souhaitez-vous avoir accès ?\n");
-	printf(" 1. Dépenses sur un mois\n");
-	printf(" 2. Revenir à l'accueil\n");
 	while (choixCorrect == 0) {
+        printf("\n\n   À quelle type de statistiques souhaitez-vous avoir accès ?\n");
+        printf(" 1. Dépenses sur un mois\n");
+        printf(" 2. Revenir à l'accueil\n");
 		printf(" Entrez votre choix : ");
 		scanf("%d",&choix);
 		printf("\n\n");
@@ -54,7 +54,7 @@ void depenses() {
     	printf("Catégorie %s :\n", arbre->fils[i]->name);
     	float sommeCat = 0.;
     	for (j=0;j<arbre->fils[i]->nbelements;j++) {
-    		categorie* cat = (struct categorie*) malloc(sizeof(struct categorie));
+    		categorie* cat;
     		strcpy(fichier,"fichiersTries/");
     		strcat(fichier,arbre->fils[i]->name);
     		strcat(fichier,"/");
@@ -78,4 +78,7 @@ void depenses() {
     	}
     	printf("  Les dépenses pour la catégorie %s ont été de : %.2f\n", arbre->fils[i]->name,sommeCat);
     }
+    free(date);
+    free(ret);
+    freeArbre(arbre);
 }
