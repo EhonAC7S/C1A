@@ -4,6 +4,7 @@
 #include "fichiers.h"
 #include "stats.h"
 #include "releve.h"
+#include "arbreCategories.h"
 
 /*
 Projet de C
@@ -22,7 +23,8 @@ void accueil() {
 	printf("    1. Trier le relevé de compte\n");
 	printf("    2. Afficher les statistiques\n");
 	printf("    3. Saisir le relevé\n");
-	printf("    4. Quitter l'application\n");
+	printf("    4. Gerer les catégories/sous-catégories\n");
+	printf("    5. Quitter l'application\n");
 	while (choixCorrect == 0) {
 		printf(" Entrez votre choix : ");
 		scanf("%d",&choix);
@@ -39,13 +41,15 @@ void accueil() {
 				break;
 			case 3: 
 				saisirReleve();
-				accueil();
-				choixCorrect = 0;
+				choixCorrect = 1;
 				break;
 			case 4:
+				gestionCategories();
+				choixCorrect = 1;
+				break;
+			case 5:
 				choixCorrect = 1;
 				quitter = 1;
-				break;
 			default:
 				break;
 		}

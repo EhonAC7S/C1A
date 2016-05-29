@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "arbreCategories.h"
 #include "fichiers.h"
-
+#include "arbreCategories.h"
 
 catTree0* loadArbre(char* fichier) {
 	catTree0* arbre = (catTree0*) malloc(sizeof(catTree0));

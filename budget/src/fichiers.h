@@ -1,10 +1,7 @@
-#include "arbreCategories.h"
-
 #ifndef FICHIERS
 #define FICHIERS
 
-//enum transac {cb="CB",l="liquide",ch="cheque"};  //type de transaction
-
+typedef struct categorie categorie;
 struct categorie {
 	char nom[20];
 	int nbelements;
@@ -14,10 +11,10 @@ struct categorie {
 	int mois[255];
 	int annee[255];
 	char *type[255];
-	char *endroit[255];  // Où les transactions ont été faites
+	char *endroit[255];  // C'est le destinaire
 	float montant[255];
 } ;
-
+typedef struct releve releve;
 struct releve {
 	int nbelements;
 	char *categorie[255];
@@ -25,22 +22,16 @@ struct releve {
 	float seuil;
 	char *date[255];
 	char *type[255]; // Type de transaction (carte, liquide, chèque)
-	char *endroit[255];  // Où les transactions ont été faites
+	char *endroit[255];  // C'est le destinaire
 	float montant[255];
 } ;
 
-int save(struct categorie *cat);
+releve *load(char *fichier);
 
-struct releve *load(char *fichier);
+categorie *loadCat(char *fichier);
 
-struct categorie *loadCat(char *fichier);
+categorie triChrono(categorie *cat, int i);
 
-//int saveCat(char *cat);
-
-struct categorie triChrono(struct categorie *cat, int i);
-
-void triSsCatDates(struct categorie *cat);
-
-void triCatDates(catTree1 *cat);
+void triSsCatDates(categorie *cat);
 
 #endif
