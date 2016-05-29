@@ -13,7 +13,6 @@ int save(catTree1* cat) {
 	strcpy(dossier,"fichiersTries/");
 	strcat(dossier,cat->name);
 	mkdir(dossier, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-	printf("%s\n", dossier);
 
 	int i;
 	for (i=0;i<cat->nbelements;i++) {
@@ -24,7 +23,6 @@ int save(catTree1* cat) {
 		strcat(fichier,"/");
 		strcat(fichier,cat->subcat[i]->nom);
 		fp = fopen(fichier,"w+");
-		printf("%s\n", fichier);
 
 		int j;
 		char *chaine= (char*) malloc(sizeof(char)*255);

@@ -76,7 +76,6 @@ void tri() {
 					arbre->fils[j]->subcat[arbre->fils[j]->nbelements] = (struct categorie*) malloc(sizeof(struct categorie));
 					arbre->fils[j]->subcat[arbre->fils[j]->nbelements]->nbelements = 1;
 					arbre->fils[j]->subcat[arbre->fils[j]->nbelements]->seuil = 0.;
-					printf("%f\n", arbre->fils[j]->subcat[arbre->fils[j]->nbelements]->seuil);
 					strcpy(arbre->fils[j]->subcat[arbre->fils[j]->nbelements]->nom,sscategorie);
 					arbre->fils[j]->subcat[arbre->fils[j]->nbelements]->date[0] = (char*) malloc(sizeof(char)*11);
 					strcpy(arbre->fils[j]->subcat[arbre->fils[j]->nbelements]->date[0],rel->date[i]);    //Encore une fois : c'est strcpy et pas =... --'
@@ -108,7 +107,7 @@ void tri() {
 			arbre->fils[arbre->nbelements]->nbelements = 1;
 			arbre->nbelements++;
 		}
-		int trouve = 0;
+		trouvecat = 0,trouvesscat = 0;
 	}
 
 	// À partir d'ici, les transactions sont classées et on n'a plus qu'à les sauvegarder dans les dossiers du nom de la categorie
