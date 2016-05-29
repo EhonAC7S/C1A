@@ -3,6 +3,7 @@
 #include <string.h>
 #include "stats.h"
 #include "fichiers.h"
+#include "arbreCategories.h"
 
 void accueilStats() {
 	int choix=0,choixCorrect=0;
@@ -21,7 +22,6 @@ void accueilStats() {
 				choixCorrect = 1;
 				break;
 			case 2:
-				accueil();
 				choixCorrect = 1;
 				break;
 			case 3:
@@ -32,11 +32,7 @@ void accueilStats() {
 				break;
 		}
 	}
-	if (quitter == 0) {
-		accueil();
-	}
 }
-
 
 void depenses() {
 	//Affiche les dépenses faites pour chaque chatégorie pour un mois
@@ -51,7 +47,6 @@ void depenses() {
     ret = strchr(date,'/')+1;
     annee = atoi(ret);
     free(ret); free(date);
-
     FILE *fp;
 
 	char *fichier;
@@ -66,9 +61,7 @@ void depenses() {
 
 	while (!feof(fp)) {
 		strcpy(nom,buf);
-		
 		fgets(buf,255,fp);
 	}
-
 	fclose(fp);
 }

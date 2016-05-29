@@ -3,8 +3,6 @@
 #define ARBRECATEGORIES
 
 typedef enum {true,false} boolean;
-//structure d'abre pour gerer les categories en 3 niveaux
-
 
 typedef struct catTree1 catTree1;
 struct catTree1 { //niveau 1 de l'arbre
@@ -30,5 +28,9 @@ int editTreeCat(catTree0* arbre);
 int reequilibreSeuil(catTree0* arbre);
 
 int gestionCategories();
+
+int save(catTree1 *cat);
+
+void triCatDates(catTree1 *cat);
 
 #endif

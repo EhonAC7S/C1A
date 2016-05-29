@@ -1,53 +1,60 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "arbreCategories.h"
 #include "fichiers.h"
-
+#include "arbreCategories.h"
 
 catTree0* loadArbre(char* fichier) {
 	catTree0* arbre = (catTree0*) malloc(sizeof(catTree0));
 	FILE* txtcat;
 	txtcat = fopen(fichier,"r");
-	int i=0;
-	int j=0;
+
+	arbre->nbelements = 0;
+	int i,j,trouve;
 	char buf[255];
 	char *ret;
 	char *ret2;
 	char categorie[20] = "";
-	char categorie2[20] = "";
 	char subcategorie[20];
 	float seuil;
 	catTree1* arbre1;
 	struct categorie* sscat;
+	fgets(buf,255,txtcat);
+
+
 	while (!feof(txtcat)) { //tant qu'on n'est pas à la fin du fichier
         ret = buf;
         ret2 = strchr(ret,',');  //ou : memchr(ret, (int) ',', 20);
 		*ret2 = '\0';
         strcpy(categorie,(char*) ret);
-        if (strcmp(categorie,categorie2) != 0) {
-        	catTree1* arbre1 = (catTree1*) malloc(sizeof(catTree1));
-        	arbre->nbelements = arbre->nbelements +1;
-        	arbre->fils[i] = arbre1;
-        	strcpy(arbre1->name,categorie);
-        	i++;
-        	j=0;
-        	strcpy(categorie,categorie2);
+        trouve = 0;
+        for (i=0;i<arbre->nbelements;i++) {
+        	if (strcmp(categorie,arbre->fils[i]->name) != 0) {
+        		trouve = 1;
+        		j=i;
+        	}
         }
+        if (trouve == 0) {
+        	arbre->fils[arbre->nbelements] = (catTree1*) malloc(sizeof(catTree1));
+        	arbre->fils[arbre->nbelements]->nbelements = 0;
+        	strcpy(arbre->fils[arbre->nbelements]->name,categorie);
+        	j=arbre->nbelements;
+        	arbre->nbelements = arbre->nbelements +1;
+        }
+
         ret = ret2+1;
         ret2 = strchr(ret,',');  //ou : memchr(ret, (int) ',', 50);
 		*ret2 = '\0';
         strcpy(subcategorie,(char*) ret);
-        sscat = (struct categorie*) malloc(sizeof(categorie));
-        arbre1->nbelements=arbre1->nbelements +1;
-        arbre1->subcat[j]=sscat;
-        j++;
-        strcpy(sscat->nom,subcategorie);
+        arbre->fils[j]->subcat[arbre->fils[j]->nbelements] = (struct categorie*) malloc(sizeof(struct categorie));
+        strcpy(arbre->fils[j]->subcat[arbre->fils[j]->nbelements]->nom,subcategorie);
+        arbre->fils[j]->subcat[arbre->fils[j]->nbelements]->nbelements = 0;
         ret = ret2+1;
         ret2 = strchr(ret,'\n');
         *ret2 = '\0';
         seuil = atof(ret);
-        sscat->seuil=seuil;
+        arbre->fils[j]->subcat[arbre->fils[j]->nbelements]->seuil=seuil;
+        arbre->fils[j]->nbelements=arbre->fils[j]->nbelements + 1;
 		fgets(buf,255,txtcat);
 	}
 	fclose(txtcat);
@@ -60,14 +67,13 @@ int saveArbre(catTree0* arbre) {
 	char categorie[20] = "";
 	char subcategorie[20] = "";
 	float prix;
-	char prixstr[7] = "";
-	int i = 0;
-	int j = 0;
-	char* chaine=(char*) malloc(sizeof(char)*255);
-	fichier = fopen("ensembleDesCategories.info","w+");
-	for (int i=0;i<arbre->nbelements;i++) {
+	char prixstr[7];
+	int i,j;
+	char* chaine = (char*) malloc(sizeof(char)*255);
+	fichier = fopen("fichiersTries/ensembleDesCategories.info","w+");
+	for (i=0;i<arbre->nbelements;i++) {
 		catTree1* ifils = (arbre->fils[i]);
-		for (int j=0;j<ifils->nbelements;j++) {
+		for (j=0;j<ifils->nbelements;j++) {
 			strcpy(chaine,(ifils->name));
 			strcat(chaine,",");
 			strcat(chaine,(ifils->subcat[j])->nom);
@@ -79,7 +85,7 @@ int saveArbre(catTree0* arbre) {
 		}
 	}
 	fclose(fichier);
-	printf("Sauvegarde effectuée");
+	printf("Sauvegarde effectuée\n");
 	return 0;
 }
 
@@ -89,11 +95,12 @@ int editTreeCat(catTree0* arbre) {
 	float seuil;
 	int did=0;
 	struct categorie* sscat;
+	int i,j;
 	printf("Les categories existantes et leurs sous categories sont : \n");
-	for (int i=0;i<arbre->nbelements;i++) {
+	for (i=0;i<arbre->nbelements;i++) {
 		catTree1* ifils = arbre->fils[i];
 		printf("%s\n",ifils->name);
-		for (int j=0;j<ifils->nbelements;j++) {
+		for (j=0;j<ifils->nbelements;j++) {
 			printf("%s,%.2f\n",(ifils->subcat[j])->nom,(ifils->subcat[j])->seuil);
 		}
 	}
@@ -116,7 +123,7 @@ int editTreeCat(catTree0* arbre) {
 				scanf("%s",subcategorie);
 				printf("Entrez le seuil : ");
 				scanf("%f",&seuil);
-				for (int i=0;i<arbre->nbelements;i++) {
+				for (i=0;i<arbre->nbelements;i++) {
 					catTree1* ifils = arbre->fils[i];
 					if (strcmp(ifils->name,categorie)==0) {
 						int j=ifils->nbelements;
@@ -146,16 +153,16 @@ int editTreeCat(catTree0* arbre) {
 				scanf("%s",categorie);
 				printf("Entrez la sous-catégorie : ");
 				scanf("%s",subcategorie);
-				for (int i=0;i<arbre->nbelements;i++) {
+				int k;
+				for (i=0;i<arbre->nbelements;i++) {
 					catTree1* ifils = arbre->fils[i];
 					if (strcmp(ifils->name,categorie)==0) {
-						for (int j=0;j<ifils->nbelements;j++) {
+						for (j=0;j<ifils->nbelements;j++) {
 							if (strcmp((ifils->subcat[j])->nom,subcategorie)==0) {
 								free(ifils->subcat[j]);
 								ifils->nbelements=(ifils->nbelements)-1;
 								if (ifils->nbelements==0) {
 									free(arbre->fils[i]);
-									int k = 0;
 									for (k=i;k<arbre->nbelements-1;k++) {
 										arbre->fils[k]=arbre->fils[k+1];
 										arbre->nbelements=(arbre->nbelements)-1;
@@ -176,10 +183,10 @@ int editTreeCat(catTree0* arbre) {
 				scanf("%s",subcategorie);
 				printf("Entrez le seuil : ");
 				scanf("%f",&seuil);
-				for (int i=0;i<arbre->nbelements;i++) {
+				for (i=0;i<arbre->nbelements;i++) {
 					catTree1* ifils = arbre->fils[i];
 					if (strcmp((ifils->name),categorie)==0) {
-						for (int j=0;j<(ifils->nbelements);j++) {
+						for (j=0;j<(ifils->nbelements);j++) {
 							if (strcmp((ifils->subcat[j])->nom,subcategorie)==0) {
 								(ifils->subcat[j])->seuil=seuil;
 							}
@@ -219,7 +226,7 @@ int reequilibreSeuil(catTree0* arbre) {
 
 int gestionCategories() {
 	
-	catTree0* arbre = loadArbre("ensembleDesCategories.info"); //il faut load le fichier comprennant le listing des cat et ss cat pour creer l'arbre
+	catTree0* arbre = loadArbre("fichiersTries/ensembleDesCategories.info"); //il faut load le fichier comprennant le listing des cat et ss cat pour creer l'arbre
 	editTreeCat(arbre);
 	//proposer de rajouter une categorie, ou de modifier le seuil d'une cat/sscat existante en modifiant l'arbre
 	saveArbre(arbre); //finir en restockant l'arbre modifié dans le fichier texte
