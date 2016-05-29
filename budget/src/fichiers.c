@@ -108,11 +108,11 @@ releve* load(char *fichier) {
 }
 
 
-struct categorie *loadCat(char *fichier) {   
+struct categorie *loadCat(char *fichier,char *nom) {   
 	//Renvoie une structure contenant tous les éléments d'une catégorie
 
 	struct categorie *cat = (struct categorie*) malloc(sizeof(struct categorie));; //structure que l'on crée
-	strcpy(cat->nom,fichier);
+	strcpy(cat->nom,nom);
 	FILE *fp;
 
 	fp = fopen(fichier,"r");

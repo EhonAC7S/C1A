@@ -65,14 +65,17 @@ void depenses() {
     		strcat(fichier,arbre->fils[i]->name);
     		strcat(fichier,"/");
     		strcat(fichier,arbre->fils[i]->subcat[j]->nom);
-    		cat = loadCat(fichier);
+    		cat = loadCat(fichier,arbre->fils[i]->subcat[j]->nom);
     		float somme = 0.;
+    		triSsCatDates(cat);
     		for (k=0;k<cat->nbelements;k++) {
-    			somme = somme + cat->montant[k];
+    			if (cat->mois[k]==mois && cat->annee[k]==annee) {
+    				somme = somme + cat->montant[k];
+    			}
     		}
-    		printf("%s : %.2f\n", cat->nom, somme);
+    		printf("    %s : %.2f\n", cat->nom, somme);
     		sommeCat = sommeCat + somme;
     	}
-    	printf("Les dépenses pour la catégorie %s ont été de : %f\n", arbre->fils[i]->name,sommeCat);
+    	printf("  Les dépenses pour la catégorie %s ont été de : %.2f\n", arbre->fils[i]->name,sommeCat);
     }
 }

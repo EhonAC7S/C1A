@@ -26,11 +26,10 @@ struct releve {
 	float montant[255];
 } ;
 
+
 releve *load(char *fichier);
 
-categorie *loadCat(char *fichier);
-
-struct categorie *loadCat(char *fichier);
+struct categorie *loadCat(char *fichier,char *nom);
 
 categorie triChrono(categorie *cat, int i);
 
