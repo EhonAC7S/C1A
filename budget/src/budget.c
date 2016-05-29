@@ -28,6 +28,7 @@ void accueil() {
 	while (choixCorrect == 0) {
 		printf(" Entrez votre choix : ");
 		scanf("%d",&choix);
+		getchar();
 		printf("\n\n");
 		switch (choix) {
 			case 1:

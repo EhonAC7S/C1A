@@ -19,6 +19,10 @@ struct catTree0 { //niveau 0, noeud principal rassemblant toutes les categories
 	catTree1* fils[20]; //maxi 20 categories
 } ;
 
+catTree0* newArbre0();
+
+catTree1* newArbre1();
+
 catTree0* loadArbre(char *fichier);
 
 int saveArbre(catTree0* arbre);
@@ -32,5 +36,7 @@ int gestionCategories();
 int save(catTree1 *cat);
 
 void triCatDates(catTree1 *cat);
+
+int freeArbre(catTree0* arbre);
 
 #endif

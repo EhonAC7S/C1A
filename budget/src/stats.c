@@ -26,7 +26,7 @@ void accueilStats() {
 				break;
 		}
 	}
-	accueil();
+	
 }
 
 void depenses() {

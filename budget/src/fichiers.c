@@ -89,7 +89,7 @@ releve* load(char *fichier) {
 		*ret2 = '\0';
         cat->montant[i] = atof(ret);
 		ret = ret2+1;
-        ret2 = memchr(ret,(int)',', 50);
+        ret2 = memchr(ret,',', 50);
 		*ret2 = '\0';
 		cat->categorie[i] = (char*) malloc(sizeof(char)*20);
 		strcpy(cat->categorie[i],(char*) ret);
