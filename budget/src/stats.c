@@ -5,6 +5,7 @@
 #include "fichiers.h"
 #include "arbreCategories.h"
 
+
 void accueilStats() {
 	int choix=0,choixCorrect=0;
 	int quitter = 0;

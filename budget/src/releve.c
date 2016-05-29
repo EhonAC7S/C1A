@@ -13,6 +13,7 @@ int saisirReleve() {
 	char dest[20] = "";
 	double prix;
 	char cat[20] = "";
+	char sscat[20] = "";
 	char cont='y';
 	fichier = fopen("releve","a+");
 	printf("Veuillez suivre les instructions suivantes : ");
@@ -27,7 +28,9 @@ int saisirReleve() {
 		scanf("%lf",&prix);
 		printf("Entrez la catégorie d'achat parmi les categories existantes : ");
 		scanf("%s",cat);
-		fprintf(fichier,"%s,%s,%s,%.2f,%s\n",date,moyen,dest,prix,cat);
+		printf("Entrez la sous-catégorie d'achat parmi les sous-categories existantes : ");
+		scanf("%s",sscat);
+		fprintf(fichier,"%s,%s,%s,%.2f,%s,%s\n",date,moyen,dest,prix,cat,sscat);
 		printf("Continuer? (y/n) : ");
 		scanf("%s",&cont);
 	} while (cont=='y');
