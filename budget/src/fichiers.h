@@ -2,7 +2,7 @@
 #define FICHIERS
 
 typedef struct categorie categorie;
-struct categorie {
+struct categorie {//structure principale des categories
 	char nom[20];
 	int nbelements;
 	float seuil;
