@@ -108,33 +108,33 @@ int editTreeCat(catTree0* arbre) {
 	int did=0;
 	categorie* sscat;
 	int i,j;
-	printf("Les categories existantes et leurs sous categories sont : \n");
+	printf("\n\n          ** Gestion de Catégories **\n\n\n");
+	printf("   Les categories existantes et leurs sous categories sont : \n");
 	for (i=0;i<arbre->nbelements;i++) {
 		catTree1* ifils = arbre->fils[i];
-		printf("%s\n",ifils->name);
+		printf("   %s\n",ifils->name);
 		for (j=0;j<ifils->nbelements;j++) {
-			printf("   %s,%.2f\n",(ifils->subcat[j])->nom,(ifils->subcat[j])->seuil);
+			printf("      %s,%.2f\n",(ifils->subcat[j])->nom,(ifils->subcat[j])->seuil);
 		}
 	}
 	int choix=0,choixCorrect=0;
-	printf("\n          *** Gestion de Catégories ***\n\n\n");
-	printf(" Que souhaitez-vous faire ?\n");
-	printf("    1. Ajouter une sous-catégorie\n");
-	printf("    2. Supprimer une sous-catégorie\n");
-	printf("    3. Changer le seuil d'une sous-categorie\n");
-	printf("    4. Quitter la gestion des catégories\n");
+	printf("\n\n   Que souhaitez-vous faire ?\n");
+	printf("      1. Ajouter une sous-catégorie\n");
+	printf("      2. Supprimer une sous-catégorie\n");
+	printf("      3. Changer le seuil d'une sous-categorie\n");
+	printf("      4. Quitter la gestion des catégories\n");
 	while (choixCorrect == 0) {
-		printf(" Entrez votre choix : ");
+		printf("   Entrez votre choix : ");
 		scanf("%d",&choix);
 		getchar();
 		printf("\n\n");
 		switch (choix) {
 			case 1:
-				printf("Entrez la catégorie (créé si inexistante) : ");
+				printf("  Entrez la catégorie (créé si inexistante) : ");
 				scanf("%s",categori);
-				printf("Entrez la sous-catégorie : ");
+				printf("  Entrez la sous-catégorie : ");
 				scanf("%s",subcategorie);
-				printf("Entrez le seuil : ");
+				printf("  Entrez le seuil : ");
 				scanf("%f",&seuil);
 				//seuil = atof(charSeuil);
 				for (i=0;i<arbre->nbelements;i++) {
@@ -166,9 +166,9 @@ int editTreeCat(catTree0* arbre) {
 				choixCorrect = 1;
 				break;
 			case 2:
-				printf("Entrez la catégorie : ");
+				printf("  Entrez la catégorie : ");
 				scanf("%s",categori);
-				printf("Entrez la sous-catégorie : ");
+				printf("  Entrez la sous-catégorie : ");
 				scanf("%s",subcategorie);
 				int k;
 				for (i=0;i<arbre->nbelements;i++) {
@@ -194,11 +194,11 @@ int editTreeCat(catTree0* arbre) {
 				choixCorrect = 1;
 				break;
 			case 3: 
-				printf("Entrez la catégorie : ");
+				printf("  Entrez la catégorie : ");
 				scanf("%s",categori);
-				printf("Entrez la sous-catégorie : ");
+				printf("  Entrez la sous-catégorie : ");
 				scanf("%s",subcategorie);
-				printf("Entrez le seuil : ");
+				printf("  Entrez le seuil : ");
 				scanf("%f",&seuil);
 				//seuil = atof(charSeuil);
 				for (i=0;i<arbre->nbelements;i++) {

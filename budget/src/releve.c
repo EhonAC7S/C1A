@@ -16,22 +16,22 @@ int saisirReleve() {
 	char sscat[20] = "";
 	char cont='y';
 	fichier = fopen("releve","a+");
-	printf("Veuillez suivre les instructions suivantes : ");
+	printf(" Veuillez suivre les instructions suivantes : ");
 	do {
-		printf("Entrez une date de la forme : jj/mm/aaaa : ");
+		printf("   Entrez une date de la forme : jj/mm/aaaa : ");
 		scanf("%s",date);
-		printf("Entrez le moyen de transaction parmis 'CB','Liquide' et 'Chèque' : ");
+		printf("   Entrez le moyen de transaction parmis 'CB','Liquide' et 'Chèque' : ");
 		scanf("%s",moyen);
-		printf("Entrez le destinataire (Max 20 caractères sans espace) : ");
+		printf("   Entrez le destinataire (Max 20 caractères sans espace) : ");
 		scanf("%s",dest);
-		printf("Entrez la somme dépensée : ");
+		printf("   Entrez la somme dépensée : ");
 		scanf("%lf",&prix);
-		printf("Entrez la catégorie d'achat parmi les categories existantes : ");
+		printf("   Entrez la catégorie d'achat parmi les categories existantes : ");
 		scanf("%s",cat);
-		printf("Entrez la sous-catégorie d'achat parmi les sous-categories existantes : ");
+		printf("   Entrez la sous-catégorie d'achat parmi les sous-categories existantes : ");
 		scanf("%s",sscat);
 		fprintf(fichier,"%s,%s,%s,%.2f,%s,%s\n",date,moyen,dest,prix,cat,sscat);
-		printf("Continuer? (y/n) : ");
+		printf(" Continuer? (y/n) : ");
 		scanf("%s",&cont);
 	} while (cont=='y');
 	fclose(fichier);
@@ -39,30 +39,38 @@ int saisirReleve() {
 }
 
 void tri() {
-	// Range les opérations dans les fichiers correspondant à leur catégorie
+	// Range les opérations de releve dans les fichiers correspondant à leur catégorie
 
+	//On commence par charger le relevé
 	struct releve *rel;
 	rel = load("releve");
 
+	//On crée l'arborescence qui correspond aux opérations triées ; on charge l'arborescence existante
 	catTree0 *arbre = (catTree0*) malloc(sizeof(catTree0));
-	//arbre->nbelements = 0;
-	//arbre->seuil = 0.;
 	arbre = loadArbre("fichiersTries/ensembleDesCategories.info");
 
 	int i,j,k;
 	int trouvecat = 0,trouvesscat = 0;
-	//char* categorie = (char*) malloc(sizeof(char)*20);
-	//char* sscategorie = (char*) malloc(sizeof(char)*20);
 	char categorie[20];
 	char sscategorie[20];
 
-	for (i=0;i<rel->nbelements;i++) { //On parcourt tous les éléments chargés
+	//Chaque ligne de releve, i.e. chaque dépense est traitée indépendemment
+	for (i=0;i<rel->nbelements;i++) { 
 		strcpy(categorie,rel->categorie[i]);
 		strcpy(sscategorie,rel->sscategorie[i]);
+
+		//On parcourt les catégories de l'arbre pour voir si celle cerchée existe déjà
 		for (j=0;j<arbre->nbelements;j++) {
+
+			//Si on trouve la catégorie cherchée :
 			if (strcmp(arbre->fils[j]->name,categorie) == 0) {
+
+				//On parcourt les sous-catégories de la catégorie pour voir si elle existe déjà
 				for (k=0;k<arbre->fils[j]->nbelements;k++) {
+
+					//Si la sous-catégorie cherchée existe déjà :
 					if (strcmp(arbre->fils[j]->subcat[k]->nom,sscategorie) == 0) {
+						//On ajoute la transaction à la sous-catégorie
 						int n = arbre->fils[j]->subcat[k]->nbelements;
 						arbre->fils[j]->subcat[k]->date[n] = (char*) malloc(11*sizeof(char));
 						strcpy(arbre->fils[j]->subcat[k]->date[n],rel->date[i]);  
@@ -75,7 +83,10 @@ void tri() {
 						trouvesscat = 1;
 					}
 				}
+
+				//Si la sous-catégorie cherchée n'existe pas :
 				if (trouvesscat == 0) {
+					//On crée la sous-catégorie puis on lui ajoute la transaction
 					arbre->fils[j]->subcat[arbre->fils[j]->nbelements] = (struct categorie*) malloc(sizeof(struct categorie));
 					arbre->fils[j]->subcat[arbre->fils[j]->nbelements]->nbelements = 1;
 					arbre->fils[j]->subcat[arbre->fils[j]->nbelements]->seuil = 0.;
@@ -92,7 +103,10 @@ void tri() {
 				trouvecat = 1;
 			}
 		}
-		if (trouvecat == 0) { //si la categorie n'existe pas encore dans cat
+
+		//Si la catégorie cherchée n'existe pas encore :
+		if (trouvecat == 0) {
+			//On crée la catégorie, puis la sous-catégorie, puis on lui ajoute la transaction
 			arbre->fils[arbre->nbelements] = (catTree1*) malloc(sizeof(catTree1));
 			strcpy(arbre->fils[arbre->nbelements]->name,categorie);
 			arbre->fils[arbre->nbelements]->seuil = 0.;
@@ -113,10 +127,12 @@ void tri() {
 		trouvecat = 0,trouvesscat = 0;
 	}
 
-	// À partir d'ici, les transactions sont classées et on n'a plus qu'à les sauvegarder dans les dossiers du nom de la categorie
+	//On choisit de trier les opérations de chaque sous-catégorie par date
 	for (i=0;i<arbre->nbelements;i++) {
 		triCatDates(arbre->fils[i]);
 	}
+
+	//On sauvegarde l'arbre créé
 	saveArbre(arbre);
 	freeArbre(arbre);
 }

@@ -16,17 +16,20 @@ Fonctionnalités du programme :
 */
 
 void accueil() {
+	//Accueil de l'application
+
 	int choix=0,choixCorrect=0;
 	int quitter = 0;
-	printf("\n          *** Gestion de budget ***\n\n\n");
-	printf(" Que souhaitez-vous faire ?\n");
-	printf("    1. Trier le relevé de compte\n");
-	printf("    2. Afficher les statistiques\n");
-	printf("    3. Saisir le relevé\n");
-	printf("    4. Gerer les catégories/sous-catégories\n");
-	printf("    5. Quitter l'application\n");
+	printf("\n           *** Gestion de budget ***\n\n\n");
+	printf("   Que souhaitez-vous faire ?\n");
+	printf("      1. Trier le relevé de compte\n");
+	printf("      2. Afficher les statistiques\n");
+	printf("      3. Saisir le relevé\n");
+	printf("      4. Gerer les catégories/sous-catégories\n");
+	printf("      5. Quitter l'application\n");
+	
 	while (choixCorrect == 0) {
-		printf(" Entrez votre choix : ");
+		printf("   Entrez votre choix : ");
 		scanf("%d",&choix);
 		getchar();
 		printf("\n\n");
